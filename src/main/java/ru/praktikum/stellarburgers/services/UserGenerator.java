@@ -13,4 +13,12 @@ public class UserGenerator {
                 .email(faker.internet().emailAddress())
                 .build();
     }
+
+    public static User shortPasswordUser() {
+        return User.builder()
+                .name(faker.name().firstName())
+                .password(faker.internet().password(1, 5))
+                .email(faker.internet().emailAddress())
+                .build();
+    }
 }

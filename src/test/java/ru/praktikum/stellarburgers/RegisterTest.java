@@ -52,7 +52,8 @@ public class RegisterTest {
     @Test
     @DisplayName("Проверка ошибки - пароль менее 6 символов")
     public void passwordTooShortTest() {
-        registerPage.registerNewUser("Agnec", "gospoden@mail.com", "09090");
+        user = UserGenerator.shortPasswordUser();
+        registerPage.registerNewUser(user.getName(), user.getEmail(), user.getPassword());
         registerPage.getInvalidPasswordErrorMessage().shouldBe(Condition.visible);
         assertEquals("Ожидаем ошибку о некорректном пароле", "Некорректный пароль", registerPage.getInvalidPasswordErrorMessage().getText());
     }
