@@ -5,14 +5,12 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import ru.praktikum.stellarburgers.model.User;
 import ru.praktikum.stellarburgers.pageobjects.ForgotPasswordPage;
 import ru.praktikum.stellarburgers.pageobjects.LoginPage;
 import ru.praktikum.stellarburgers.pageobjects.MainPage;
 import ru.praktikum.stellarburgers.pageobjects.RegisterPage;
-import ru.praktikum.stellarburgers.services.DriverInfo;
+import ru.praktikum.stellarburgers.services.Driver;
 import ru.praktikum.stellarburgers.services.UserClient;
 import ru.praktikum.stellarburgers.services.UserGenerator;
 
@@ -20,31 +18,17 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-@RunWith(Parameterized.class)
 public class LoginTest {
-    private static final DriverInfo driverInfo = new DriverInfo();
+    private static final Driver driverInfo = new Driver();
     public static MainPage mainPage;
     private final UserClient userClient = new UserClient();
-    private final String driverPath;
     private User user;
-
-    public LoginTest(String driverPath) {
-        this.driverPath = driverPath;
-    }
-
-    @Parameterized.Parameters
-    public static Object[][] getData() {
-        return new Object[][]{
-                {driverInfo.getChromeDriverAbsolutePath()},
-                {driverInfo.getYandexDriverAbsolutePath()},
-        };
-    }
 
     @Before
     public void setUp() {
         user = UserGenerator.random();
         userClient.registerUser(user);
-        System.setProperty("webdriver.chrome.driver", driverPath);
+        System.setProperty("webdriver.chrome.driver", driverInfo.getDriverPath());
         mainPage = open(MainPage.URL_BASE, MainPage.class);
     }
 
