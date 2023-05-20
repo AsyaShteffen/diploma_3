@@ -25,17 +25,21 @@ public class MainPage extends CommonButtons {
     @FindBy(how = How.XPATH, using = ".//span[text()='Начинки']")
     private SelenideElement fillingsButton;
 
-    // текст блока булки
-    @FindBy(how = How.XPATH, using = ".//h2[text()='Булки']")
-    private SelenideElement bunsText;
+//    // текст блока булки
+//    @FindBy(how = How.XPATH, using = ".//h2[text()='Булки']")
+//    private SelenideElement bunsText;
+//
+//    // текст блока соусы
+//    @FindBy(how = How.XPATH, using = ".//h2[text()='Соусы']")
+//    private SelenideElement saucesText;
+//
+//    // текст блока начинки
+//    @FindBy(how = How.XPATH, using = ".//h2[text()='Начинки']")
+//    private SelenideElement fillingsText;
 
-    // текст блока соусы
-    @FindBy(how = How.XPATH, using = ".//h2[text()='Соусы']")
-    private SelenideElement saucesText;
-
-    // текст блока начинки
-    @FindBy(how = How.XPATH, using = ".//h2[text()='Начинки']")
-    private SelenideElement fillingsText;
+    // текущий выбранный таб
+    @FindBy(how = How.XPATH, using = "//div[contains(@class, 'current')]/span")
+    private SelenideElement currentTab;
 
     // кнопка "Оформить заказ"
     @FindBy(how = How.XPATH, using = ".//button[text()='Оформить заказ']")
@@ -46,34 +50,39 @@ public class MainPage extends CommonButtons {
         logInButton.shouldBe(Condition.visible).click();
     }
 
-    @Step("Клик по кнопке булки")
+    @Step("Клик по табу булки")
     public void clickBunsSection() {
         bunsButton.shouldBe(Condition.visible).click();
     }
 
-    @Step("Клик по кнопке соусы")
+    @Step("Клик по табу соусы")
     public void clickSaucesSection() {
         saucesButton.shouldBe(Condition.visible).click();
     }
 
-    @Step("Клик по кнопке начинки")
+    @Step("Клик по табу начинки")
     public void clickFillingsSection() {
         fillingsButton.shouldBe(Condition.visible).click();
     }
 
-    @Step("Получение текста блока булочки")
-    public SelenideElement getTextBunsBlock() {
-        return bunsText;
-    }
+//    @Step("Получение текста блока булочки")
+//    public SelenideElement getTextBunsBlock() {
+//        return bunsText;
+//    }
+//
+//    @Step("Получение текста блока соусы")
+//    public SelenideElement getTextSaucesBlock() {
+//        return saucesText;
+//    }
+//
+//    @Step("Получение текста блока начинки")
+//    public SelenideElement getTextFillingsBlock() {
+//        return fillingsText;
+//    }
 
-    @Step("Получение текста блока соусы")
-    public SelenideElement getTextSaucesBlock() {
-        return saucesText;
-    }
-
-    @Step("Получение текста блока начинки")
-    public SelenideElement getTextFillingsBlock() {
-        return fillingsText;
+    @Step("Получение текста текущего таба")
+    public String getCurrentTabText(){
+        return currentTab.getText();
     }
 
     public SelenideElement getCreateOrderButton() {

@@ -12,6 +12,7 @@ import ru.praktikum.stellarburgers.services.DriverInfo;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
 public class ConstructorTest {
@@ -43,24 +44,30 @@ public class ConstructorTest {
     }
 
     @Test
-    @DisplayName("Проверка перехода к разделу Булки")
-    public void openBunsBlockTest() {
+    @DisplayName("Проверка перехода на таб Булки")
+    public void openBunsTabTest() {
         mainPage.clickSaucesSection();
         mainPage.clickBunsSection();
-        mainPage.getTextBunsBlock().shouldBe(Condition.visible);
+        String expectedTab = "Булки";
+        String currentTab = mainPage.getCurrentTabText();
+        assertEquals("Таб не выбран", expectedTab, currentTab);
     }
 
     @Test
-    @DisplayName("Проверка перехода к разделу Соусы")
-    public void openSaucesBlockTest() {
+    @DisplayName("Проверка перехода на таб Соусы")
+    public void openSaucesTabTest() {
         mainPage.clickSaucesSection();
-        mainPage.getTextSaucesBlock().shouldBe(Condition.visible);
+        String expectedTab = "Соусы";
+        String currentTab = mainPage.getCurrentTabText();
+        assertEquals("Таб не выбран", expectedTab, currentTab);
     }
 
     @Test
-    @DisplayName("Проверка перехода к разделу Начинки")
-    public void openFillingsBlockTest() {
+    @DisplayName("Проверка перехода на таб Начинки")
+    public void openFillingsTabTest() {
         mainPage.clickFillingsSection();
-        mainPage.getTextFillingsBlock().shouldBe(Condition.visible);
+        String expectedTab = "Начинки";
+        String currentTab = mainPage.getCurrentTabText();
+        assertEquals("Таб не выбран", expectedTab, currentTab);
     }
 }
