@@ -20,15 +20,6 @@ public class CommonButtons {
     @FindBy(how = How.XPATH, using = "//p[text()='Конструктор']")
     private SelenideElement constructorButton;
 
-    // кнопка ленты заказов
-    @FindBy(how = How.CLASS_NAME, using = "undefined ml-2")
-    private SelenideElement orderFeedButton;
-
-    @Step("Клик на кнопку-логотип")
-    public void clickLogoButton() {
-        logoButton.shouldBe(Condition.visible).click();
-    }
-
     @Step("Клик на кнопку-личный кабинет")
     public void clickPersonalAreaButton() {
         personalAreaButton.shouldBe(Condition.visible).click();

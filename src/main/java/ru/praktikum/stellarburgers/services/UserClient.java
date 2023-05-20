@@ -7,6 +7,9 @@ import ru.praktikum.stellarburgers.model.User;
 import static io.restassured.RestAssured.given;
 
 public class UserClient extends RestAssuredClient {
+    public static final String AUTH_REGISTER = "auth/register";
+    public static final String AUTH_LOGIN = "auth/login";
+    public static final String AUTH_USER = "auth/user";
     private String accessToken;
 
     private void getTokens(ValidatableResponse response) {
@@ -22,7 +25,7 @@ public class UserClient extends RestAssuredClient {
                 .and()
                 .body(user)
                 .when()
-                .post("auth/register")
+                .post(AUTH_REGISTER)
                 .then();
     }
 
@@ -33,13 +36,13 @@ public class UserClient extends RestAssuredClient {
                 .and()
                 .body(user)
                 .when()
-                .post("auth/login")
+                .post(AUTH_LOGIN)
                 .then();
         getTokens(validatableResponse);
         return validatableResponse;
     }
 
-    @Step("Отправка DELETE запроса к /auth/register")
+    @Step("Отправка DELETE запроса к /auth/user")
     public void deleteUser() {
         if (accessToken == null) {
             return;
@@ -48,7 +51,7 @@ public class UserClient extends RestAssuredClient {
                 .spec(getBaseSpec())
                 .auth().oauth2(accessToken)
                 .when()
-                .delete("auth/user")
+                .delete(AUTH_USER)
                 .then()
                 .statusCode(202);
     }
