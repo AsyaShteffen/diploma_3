@@ -20,26 +20,14 @@ public class UserClient extends RestAssuredClient {
 
     @Step("Отправка POST запроса к /auth/register")
     public void registerUser(User user) {
-        given()
+        ValidatableResponse validatableResponse = given()
                 .spec(getBaseSpec())
                 .and()
                 .body(user)
                 .when()
                 .post(AUTH_REGISTER)
                 .then();
-    }
-
-    @Step("Отправка POST запроса к /auth/login")
-    public ValidatableResponse loginUser(User user) {
-        ValidatableResponse validatableResponse = given()
-                .spec(getBaseSpec())
-                .and()
-                .body(user)
-                .when()
-                .post(AUTH_LOGIN)
-                .then();
         getTokens(validatableResponse);
-        return validatableResponse;
     }
 
     @Step("Отправка DELETE запроса к /auth/user")
@@ -47,6 +35,7 @@ public class UserClient extends RestAssuredClient {
         if (accessToken == null) {
             return;
         }
+
         given()
                 .spec(getBaseSpec())
                 .auth().oauth2(accessToken)
