@@ -1,0 +1,64 @@
+package ru.praktikum.stellarburgers.pageobjects;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+public class MainPage extends CommonButtons {
+    public final static String URL_BASE = "https://stellarburgers.nomoreparties.site/";
+
+    // кнопка войти в аккаунт
+    @FindBy(how = How.XPATH, using = ".//button[text()='Войти в аккаунт']")
+    private SelenideElement logInButton;
+
+    // кнопка булок
+    @FindBy(how = How.XPATH, using = ".//span[text()='Булки']")
+    private SelenideElement bunsButton;
+
+    // кнопка соусов
+    @FindBy(how = How.XPATH, using = ".//span[text()='Соусы']")
+    private SelenideElement saucesButton;
+
+    // кнопка начинок
+    @FindBy(how = How.XPATH, using = ".//span[text()='Начинки']")
+    private SelenideElement fillingsButton;
+
+    // текущий выбранный таб
+    @FindBy(how = How.XPATH, using = "//div[contains(@class, 'current')]/span")
+    private SelenideElement currentTab;
+
+    // кнопка "Оформить заказ"
+    @FindBy(how = How.XPATH, using = ".//button[text()='Оформить заказ']")
+    private SelenideElement createOrderButton;
+
+    @Step("Клик по кнопке войти в аккаунт")
+    public void clickLogInButton() {
+        logInButton.shouldBe(Condition.visible).click();
+    }
+
+    @Step("Клик по табу булки")
+    public void clickBunsSection() {
+        bunsButton.shouldBe(Condition.visible).click();
+    }
+
+    @Step("Клик по табу соусы")
+    public void clickSaucesSection() {
+        saucesButton.shouldBe(Condition.visible).click();
+    }
+
+    @Step("Клик по табу начинки")
+    public void clickFillingsSection() {
+        fillingsButton.shouldBe(Condition.visible).click();
+    }
+
+    @Step("Получение текста текущего таба")
+    public String getCurrentTabText(){
+        return currentTab.getText();
+    }
+
+    public SelenideElement getCreateOrderButton() {
+        return createOrderButton;
+    }
+}
